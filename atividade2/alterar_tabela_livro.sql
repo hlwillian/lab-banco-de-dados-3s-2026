@@ -1,0 +1,44 @@
+USE database biblioteca_pessoaL_1S2026;
+
+CREATE TABLE livro(
+id_livro INT AUTO_INCREMENT PRIMARY KEY;
+título VARCHAR(255) NOT NULL,
+sinopse TEXT NOT NULL,
+autor VARCHAR(128) NOT NULL,
+editora VARCHAR(128) NOT NULL,
+categoria VARCHAR(128) NOT NULL,
+ano_publicacao YEAR NOT NULL
+);
+
+ALTER TABLE livro
+DROP COLUMN autor,
+DROP COLUMN editora,
+DROP COLUMN categoria;
+
+ALTER TABLE livro
+ADD COLUMN id_usuario INT,
+ADD COLUMN id_autor INT,
+ADD COLUMN id_editora INT,
+ADD COLUMN id_categoria INT,
+ADD COLUMN data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+ADD COLUMN data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+ALTER TABLE livro
+ADD CONSTRAINT fk_livro_usuario
+FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+ON DELETE CASCADE;
+
+ALTER TABLE livro
+ADD CONSTRAINT fk_livro_autor
+FOREIGN KEY (id_autor) REFERENCES autor(id_autor)
+ON DELETE RESTRICT;
+
+ALTER TABLE livro
+ADD CONSTRAINT fk_livro_editora
+FOREIGN KEY (id_editora) REFERENCES editora(id_editora)
+ON DELETE RESTRICT;
+
+ALTER TABLE livro
+ADD CONSTRAINT fk_livro_categoria
+FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
+ON DELETE RESTRICT

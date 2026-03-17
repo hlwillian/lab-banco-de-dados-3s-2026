@@ -1,0 +1,11 @@
+USE database biblioteca_pessoaL_1S2026;
+
+CREATE TABLE editora (
+    id_editora INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL UNIQUE,
+    cidade VARCHAR(64),
+    estado VARCHAR(64),
+    pais VARCHAR(64),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
